@@ -2,8 +2,8 @@ var searchBoxList = document.getElementsByName('q') || []
 if (searchBoxList.length > 0) {
     for (const i in searchBoxList) {
         if (searchBoxList[i].type === 'text') {
-            const searchBoxValue = searchBoxList[i].value || null
-            if (searchBoxValue !== null) {
+            const searchBoxValue = searchBoxList[i].value
+            if (searchBoxValue !== undefined) {
                 chrome.runtime.sendMessage({
                     searchBoxValue: searchBoxValue
                 }, function (response) {
@@ -22,14 +22,3 @@ if (searchBoxList.length > 0) {
         }
     }
 }
-
-// window.postMessage({
-//     type: "message",
-//     text: "hello"
-// }, "*");
-
-// chrome.runtime.sendMessage({
-//     greeting: "hello"
-// }, function (response) {
-//     console.log(response.farewell);
-// });
