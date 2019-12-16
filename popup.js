@@ -12,11 +12,6 @@ changeColor.onclick = function (element) {
         active: true,
         currentWindow: true
     }, function (tabs) {
-        // chrome.tabs.executeScript(
-        //         tabs[0].id, {
-        //             // code: 'document.body.style.backgroundColor = "' + color + '";'
-        //             file: 'var color_data = ' + color
-        //         }),
         chrome.tabs.executeScript(
             tabs[0].id, {
                 // code: 'document.body.style.backgroundColor = "' + color + '";'
@@ -24,3 +19,14 @@ changeColor.onclick = function (element) {
             });
     });
 };
+
+chrome.runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+        console.log(sender.tab ?
+            "from a content script:" + sender.tab.url :
+            "from the extension");
+        alert(request.searchBoxValue)
+        sendResponse({
+            status: "ok"
+        });
+    });
