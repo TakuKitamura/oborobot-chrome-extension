@@ -24,6 +24,15 @@ chrome.runtime.onMessage.addListener(
         // alert(request.searchBoxValue)
         let searchBoxValue = document.getElementById('search-box-value');
         searchBoxValue.innerText = request.searchBoxValue
+
+        const xhr = new XMLHttpRequest();
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.open("POST", 'http://localhost:3000/api/user/query', true);
+        xhr.send(JSON.stringify({
+            href: sender.tab.url,
+            searchValue: request.searchBoxValue
+        }))
+
         sendResponse({
             status: "ok"
         });
