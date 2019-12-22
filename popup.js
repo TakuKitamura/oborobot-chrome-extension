@@ -27,6 +27,7 @@ chrome.runtime.onMessage.addListener(
             xhr.open("POST", 'http://localhost:3000/api/user/favorite', true);
             xhr.send(JSON.stringify({
                 href: sender.tab.url,
+                lang: request.lang,
             }))
             let favoriteValue = document.getElementById('favorite-value');
             favoriteValue.innerText = '記事を登録しました｡'
